@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informatik 9 – HTML und CSS: Mein Lernheft</title>
+<style>
+:root{--ink:#1d2733;--muted:#5b6774;--line:#d9e0e7;--bg:#f4f6f9;--card:#fff;--acc:#2563a8;--acc2:#e7f0fa;--ok:#2e7d32;--warn:#b26a00;--bad:#c62828;--auf:#fff7e0;--aufb:#f0d48a}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:system-ui,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.5}
+#app{display:flex;min-height:100%}
+aside{width:260px;flex:0 0 260px;background:var(--card);border-right:1px solid var(--line);padding:1rem .8rem;position:sticky;top:0;height:100vh;overflow:auto}
+aside h1{font-size:1.1rem;margin:0 0 .2rem}
+aside .who{color:var(--muted);font-size:.85rem;margin-bottom:.8rem}
+aside a{display:block;padding:.35rem .5rem;border-radius:6px;color:var(--ink);text-decoration:none;font-size:.92rem}
+aside a:hover,aside a.on{background:var(--acc2)}
+aside .sec{font-size:.75rem;color:var(--muted);margin:.8rem 0 .2rem;text-transform:uppercase;letter-spacing:.04em}
+main{flex:1;padding:1rem 1.4rem 4rem;max-width:960px}
+.bar{position:sticky;top:0;background:var(--bg);padding:.5rem 0;z-index:5;display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--line);margin-bottom:1rem}
+.btn{border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:8px;padding:.45rem .85rem;font:inherit;font-size:.95rem;cursor:pointer}
+.btn.sec{background:#fff;color:var(--acc)}.btn.ghost{background:#fff;color:var(--ink);border-color:var(--line)}.btn.danger{background:#fff;color:var(--bad);border-color:var(--bad)}
+.btn.sm{padding:.2rem .55rem;font-size:.85rem}
+.state{font-size:.85rem;color:var(--muted)}.state.dirty{color:var(--warn);font-weight:600}
+.page{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;margin:0 0 1.4rem}
+.page>.ph{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:.4rem;margin-bottom:.6rem}
+.page>.ph input.t{font-size:1.25rem;font-weight:700;border:none;flex:1;min-width:12rem;background:transparent;font-family:inherit;color:inherit}
+.page>.ph input.d{border:1px solid var(--line);border-radius:6px;padding:.2rem .4rem;font:inherit;font-size:.9rem}
+.blk{border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;margin:.7rem 0;background:#fff;position:relative}
+.blk .bh{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted);margin-bottom:.35rem}
+.blk .bh .grow{flex:1}
+.blk .bh button{border:none;background:none;cursor:pointer;color:var(--muted);font-size:1rem;padding:0 .2rem}
+.auf{background:var(--auf);border:1px solid var(--aufb);border-radius:8px;padding:.45rem .7rem;margin-bottom:.5rem;font-size:.95rem}
+.auf b{color:#7a5a00}
+textarea,input[type=text],input[type=url],input[type=date]{font:inherit;border:1px solid var(--line);border-radius:6px;padding:.4rem .5rem;width:100%;background:#fff;color:var(--ink)}
+textarea{min-height:4.5rem;resize:vertical}
+label.f{display:block;font-size:.85rem;color:var(--muted);margin:.4rem 0 .15rem}
+.rte{min-height:5rem;border:1px solid var(--line);border-radius:6px;padding:.5rem .6rem;outline:none}
+.rte:focus,textarea:focus,input:focus{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc2)}
+.tb{display:flex;gap:.25rem;margin-bottom:.3rem}
+.tb button{border:1px solid var(--line);background:#fff;border-radius:5px;min-width:2rem;cursor:pointer;font:inherit;font-size:.9rem}
+mark{background:#fff176}
+.drop{border:2px dashed var(--line);border-radius:8px;padding:1rem;text-align:center;color:var(--muted);cursor:pointer}
+.drop.over{border-color:var(--acc);background:var(--acc2)}
+.blk img.pic{max-width:100%;border-radius:6px;display:block;margin:.3rem 0}
+.blk iframe.pdf{width:100%;height:520px;border:1px solid var(--line);border-radius:6px}
+canvas.draw{border:1px solid var(--line);border-radius:6px;background:#fff;touch-action:none;max-width:100%;cursor:crosshair}
+.pal{display:flex;gap:.3rem;align-items:center;flex-wrap:wrap;margin-bottom:.3rem}
+.pal button.c{width:1.6rem;height:1.6rem;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer}
+.pal button.c.on{box-shadow:0 0 0 2px var(--ink)}
+table.tab{border-collapse:collapse;width:100%}
+table.tab td{border:1px solid var(--line);padding:0}
+table.tab td input{border:none;border-radius:0;width:100%}
+table.tab tr:first-child input{font-weight:700;background:var(--bg)}
+.chk{display:flex;gap:.5rem;align-items:center;margin:.2rem 0}
+.chk input[type=checkbox]{transform:scale(1.3)}
+.amp{display:flex;gap:.3rem}
+.amp button{border:2px solid transparent;background:none;font-size:1.3rem;border-radius:8px;cursor:pointer;padding:0 .2rem}
+.amp button.on{border-color:var(--ink)}
+.self{display:flex;gap:.6rem;align-items:center;justify-content:space-between;border-bottom:1px dashed var(--line);padding:.25rem 0}
+.mood button{font-size:1.4rem;border:2px solid transparent;background:none;border-radius:8px;cursor:pointer}
+.mood button.on{border-color:var(--ink)}
+.caesar .rings{font-family:Consolas,monospace;font-size:.95rem;overflow:auto;white-space:nowrap;background:var(--bg);border-radius:6px;padding:.4rem .6rem;margin:.4rem 0}
+.lk{display:flex;gap:.5rem;align-items:center}
+.teacher{background:#eef7ee;border:1px solid #b9dcb9;border-radius:8px;padding:.5rem .7rem;margin-top:.6rem}
+.stamp{display:inline-block;border:3px solid var(--ok);color:var(--ok);font-weight:800;border-radius:8px;padding:.1rem .5rem;transform:rotate(-4deg);margin-right:.4rem}
+.stamp.bad{border-color:var(--bad);color:var(--bad)}.stamp.star{border-color:#c79a00;color:#c79a00}
+.add{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem}
+.add button{border:1px dashed var(--acc);background:#fff;color:var(--acc);border-radius:8px;padding:.3rem .6rem;cursor:pointer;font:inherit;font-size:.88rem}
+.ov{position:fixed;inset:0;background:rgba(20,30,40,.45);display:flex;align-items:center;justify-content:center;z-index:50;padding:1rem}
+.dlg{background:#fff;border-radius:12px;max-width:560px;width:100%;padding:1.1rem 1.3rem;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.dlg h2{margin:.1rem 0 .6rem;font-size:1.2rem}
+.toast{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:#1d2733;color:#fff;padding:.6rem 1rem;border-radius:8px;z-index:90}
+.gl dt{font-weight:700;margin-top:.5rem}.gl dd{margin:0 0 .2rem 0}
+.muted{color:var(--muted)}.small{font-size:.85rem}
+.ro{background:var(--bg)}
+@media (max-width:820px){aside{display:none}main{padding:.6rem}}
+@media print{aside,.bar,.add,.bh button,.tb,.pal,.no-print,.dk-legal-buttons,.drop{display:none!important}body{background:#fff;font-size:12pt}main{max-width:none;padding:0}.page{break-inside:avoid-page;border:none;padding:0 0 1rem}.blk{break-inside:avoid}iframe.pdf{display:none}}
+/* Kursinhalte */
+.kinfo{background:#f7f9fc;border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;margin:.4rem 0 .8rem}
+.kinfo details,.kv details{background:#fff;border:1px solid var(--line);border-radius:8px;padding:.45rem .7rem;margin:.4rem 0}
+.kinfo summary,.kv summary{cursor:pointer;font-weight:700}
+.niv{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.4rem 0}
+.niv div{border-radius:8px;padding:.45rem .6rem;font-size:.92rem}.niv .b{background:#eaf5ea}.niv .s{background:#e7f0fa}.niv .e{background:#f1eaf7}
+.niv b{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em}
+.kq{margin:.5rem 0;padding:.4rem .6rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.kq p{margin:0 0 .2rem;font-weight:700}.kq label{display:block;cursor:pointer;padding:.1rem .2rem}
+.kv h2{margin-top:0;font-size:1.25rem}.kv h3{font-size:1.05rem}
+.kv table{border-collapse:collapse;width:100%}.kv td,.kv th{border-bottom:1px solid var(--line);padding:.35rem .4rem;text-align:left;vertical-align:top}
+.tip{background:#e8f3f8;border-radius:8px;padding:.45rem .7rem;margin:.4rem 0}.warn{background:#fdecea;border-radius:8px;padding:.45rem .7rem;margin:.4rem 0}
+.words span{display:inline-block;background:#e3f0f6;color:#2c6e8f;border-radius:99px;padding:.1rem .55rem;margin:.12rem;font-size:.88rem}
+.kv pre{background:#f0eee8;border-radius:8px;padding:.6rem .8rem;white-space:pre-wrap;font-family:Consolas,monospace;font-size:.88rem}
+.kv code,.kinfo code{background:#f0eee8;border-radius:4px;padding:0 .3rem;font-family:Consolas,monospace}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.kc{border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;margin:.6rem 0;background:#fff}.kc.rule{border-left:6px solid #b8860b;background:#fffaf0}.kv h2{color:#7a2e2e}
+@media (max-width:820px){.niv,.grid2{grid-template-columns:1fr}}
+/* Rechtliches */
+.dk-legal{margin:2rem 0 0;padding:1rem;text-align:center;font-size:.85rem;border-top:1px solid #ddd;color:#666}
+.dk-legal-buttons{display:flex;gap:.5rem;justify-content:center}
+.dk-btn{padding:.35rem .8rem;border:1px solid #345;border-radius:6px;background:#f4f6f8;color:#234;cursor:pointer;font-size:.85rem}
+.dk-cc a{color:#345}
+.dk-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:1rem}
+.dk-modal.dk-open{display:flex}
+.dk-modal-box{background:#fff;max-width:480px;width:100%;padding:1.5rem 1.75rem;border-radius:10px;position:relative;line-height:1.5}
+.dk-close{position:absolute;top:.5rem;right:.75rem;border:none;background:none;font-size:1.6rem;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="app"><p style="padding:2rem">Heft wird geladen …</p></div>
+<div id="ov"></div>
+<script type="application/json" id="heft-daten">{"meta":{"titel":"Informatik 9 – HTML und CSS","klasse":"WP 9","pin":"bf3009f2"},"seiten":[{"id":"p1","titel":"Was sind HTML und CSS? – Meine erste Webseite","datum":"2026-11-16","auftrag":"Notiere hier die Merksätze aus der Stunde und füge einen Screenshot deiner ersten Webseite ein (Windows+Shift+S, dann Strg+V). Darunter kannst du alles einfügen, was dir hilft: Texte, Bilder, Links, Dateien …","bloecke":[]}]}</script>
+<script>
+(function(){
+"use strict";
+/* ===== Daten ===== */
+var D;try{D=JSON.parse(document.getElementById("heft-daten").textContent||"{}");}catch(e){D={};}
+D.meta=D.meta||{};D.seiten=D.seiten||[];
+if(!D.meta.id)D.meta.id="h"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+var UI={lehrer:false,dirty:false,handle:null,view:"heft",draw:{}};
+var LSK="infheft:"+D.meta.id;
+var TYPES={text:"✏️ Text",frage:"❓ Frage",tagebuch:"📔 Tagebuch",bild:"🖼️ Bild",datei:"📎 Datei / PDF",link:"🔗 Link / Video",zeichnung:"🎨 Zeichnung",tabelle:"▦ Tabelle",checkliste:"☑️ Checkliste",selbst:"🚦 Das kann ich",begriff:"📚 Fachbegriff",caesar:"🔐 Geheimschrift"};
+function $(s,r){return (r||document).querySelector(s);}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+function today(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function fmtD(i){if(!i)return "";var p=i.split("-");return p[2]+"."+p[1]+"."+p[0];}
+function toast(t){var e=document.createElement("div");e.className="toast";e.textContent=t;document.body.appendChild(e);setTimeout(function(){e.remove();},3200);}
+function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0).toString(16);}
+function md(t){return esc(t).replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>").replace(/\n/g,"<br>");}
+function findB(sid,bid){var s=D.seiten.filter(function(x){return x.id===sid;})[0];if(!s)return {};return {s:s,b:bid?(s.bloecke||[]).filter(function(x){return x.id===bid;})[0]:null};}
+/* Sanitizer für Rich-Text */
+var OK={B:1,STRONG:1,I:1,EM:1,U:1,UL:1,OL:1,LI:1,BR:1,P:1,DIV:1,MARK:1,CODE:1};
+function clean(html){var t=document.createElement("template");t.innerHTML=html||"";
+  (function walk(n){Array.prototype.slice.call(n.childNodes).forEach(function(c){
+    if(c.nodeType===1){if(!OK[c.tagName]){var span=document.createTextNode(c.textContent);n.replaceChild(span,c);return;}
+      Array.prototype.slice.call(c.attributes).forEach(function(a){c.removeAttribute(a.name);});walk(c);}
+    else if(c.nodeType!==3)n.removeChild(c);});})(t.content);
+  return t.innerHTML;}
+
+/* ===== Speichern ===== */
+function liveMarks(){Array.prototype.forEach.call(document.querySelectorAll("[data-mk]"),function(el){var blk=el.closest(".page");if(!blk)return;var sid=blk.id.slice(2),x=findB(sid,el.dataset.mk);if(!x.b)return;var ok=fertig(x.b);el.style.color=ok?"#2e7d32":"#b26a00";el.textContent=ok?"✔ erledigt":"○ Auftrag";});}
+function dirty(){setTimeout(function(){liveMarks();checkUnlock();},0);UI.dirty=true;try{localStorage.setItem(LSK,JSON.stringify({t:Date.now(),d:D}));}catch(e){}
+  var s=$("#state");if(s){s.textContent="● nicht gespeichert";s.className="state dirty";}}
+function serial(){
+  var json=JSON.stringify(D).replace(/</g,"\\u003c");
+  var root=document.documentElement.cloneNode(true);
+  root.querySelector("#app").innerHTML='<p style="padding:2rem">Heft wird geladen …</p>';
+  root.querySelector("#ov").innerHTML="";
+  Array.prototype.slice.call(root.querySelectorAll(".toast")).forEach(function(e){e.remove();});
+  root.querySelector("#heft-daten").textContent=json;
+  return "<!DOCTYPE html>\n"+root.outerHTML;}
+function fname(){var n=(D.meta.name||"Heft").trim().replace(/[^\wäöüÄÖÜß\- ]/g,"").replace(/\s+/g,"_");var t=(D.meta.titel||"Informatik").replace(/[^\wäöüÄÖÜß\- ]/g,"").replace(/\s+/g,"_");return "Heft_"+t+"_"+n+".html";}
+function saveFile(asNew){
+  var html=serial();
+  function done(){UI.dirty=false;D.meta.gespeichert=new Date().toISOString();try{localStorage.setItem(LSK,JSON.stringify({t:Date.now(),d:D,saved:true}));}catch(e){}
+    var s=$("#state");if(s){s.textContent="✔ gespeichert";s.className="state";}toast("Heft gespeichert.");}
+  if(window.showSaveFilePicker){
+    var p=(!asNew&&UI.handle)?Promise.resolve(UI.handle):window.showSaveFilePicker({suggestedName:fname(),types:[{description:"Heft (HTML)",accept:{"text/html":[".html"]}}]});
+    p.then(function(h){UI.handle=h;return h.createWritable();}).then(function(w){return w.write(new Blob([html],{type:"text/html"})).then(function(){return w.close();});}).then(done).catch(function(e){if(e&&e.name==="AbortError")return;dlFallback(html);done();});
+  }else{dlFallback(html);done();}
+}
+function dlFallback(html){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([html],{type:"text/html"}));a.download=fname();document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},2000);}
+
+/* ===== Rendern ===== */
+/* ===== Freischaltung ===== */
+function txt(h){var d=document.createElement("div");d.innerHTML=h||"";return (d.textContent||"").trim();}
+function fertig(b){switch(b.typ){
+  case "text":return txt(b.html).length>=15;
+  case "frage":return (b.antwort||"").trim().length>=10;
+  case "tagebuch":return (b.gelernt||"").trim().length>=10;
+  case "bild":return !!b.src;
+  case "datei":return !!b.data;
+  case "link":return /^https?:\/\/\S+\.\S+/i.test(b.url||"");
+  case "zeichnung":return !!b.png;
+  case "tabelle":return (b.zeilen||[]).slice(1).some(function(r){return r.some(function(c){return (c||"").trim().length>0;});});
+  case "checkliste":return (b.punkte||[]).length>0&&(b.punkte||[]).every(function(p){return p.ok;});
+  case "selbst":return (b.punkte||[]).length>0&&(b.punkte||[]).every(function(p){return p.v;});
+  case "begriff":return !!(b.begriff||"").trim()&&(b.erklaerung||"").trim().length>=10;
+  case "caesar":return !!(b.geheim||"").trim();}return false;}
+function fortschritt(s){var p=(s.bloecke||[]).filter(function(b){return b.pflicht;});var f=p.filter(fertig).length;return {f:f,n:p.length,q:p.length?f/p.length:1};}
+function sperre(){var o=D.meta.sperre;return o&&o.an?o:null;}
+function gesperrt(){/* liefert Map seitenId -> vorherige Pflichtseite (die noch nicht reicht) */
+  var res={},sp=sperre();if(!sp||UI.lehrer)return res;var prev=null,prevLocked=false;
+  D.seiten.forEach(function(s){if(!s.pflicht)return;
+    if(prev&&!s.frei&&(prevLocked||fortschritt(prev).q<(sp.schwelle||100)/100-1e-9)){res[s.id]=prev;prevLocked=true;}else prevLocked=false;
+    prev=s;});return res;}
+function lockSig(){return Object.keys(gesperrt()).join(",");}
+function checkUnlock(){var sig=lockSig();if(sig!==UI.lockSig){var before=UI.lockSig||"";UI.lockSig=sig;UI.pending=true;if(sig.length<before.length)toast("🔓 Die nächste Seite ist freigeschaltet!");}}
+function render(){
+  UI.lockSig=lockSig();UI.pending=false;var LK=gesperrt();UI.LK=LK;
+  var a='<aside><h1>📓 '+esc(D.meta.titel||"Mein Informatik-Heft")+'</h1><div class="who">'+esc(D.meta.name||"")+(D.meta.klasse?' · '+esc(D.meta.klasse):'')+'</div>'+
+    '<a href="#" data-act="view" data-v="heft" class="'+(UI.view==="heft"?"on":"")+'">📄 '+(D.kurs?"Meine Stunden":"Alle Seiten")+'</a>'+(D.kurs&&D.kurs.views?Object.keys(D.kurs.views).map(function(k){return '<a href="#" data-act="view" data-v="k:'+k+'" class="'+(UI.view==="k:"+k?"on":"")+'">'+esc(D.kurs.views[k].t)+'</a>';}).join(""):"")+'<a href="#" data-act="view" data-v="glossar" class="'+(UI.view==="glossar"?"on":"")+'">📚 Mein Wissensspeicher</a>'+
+    '<div class="sec">Inhalt</div>'+(function(){var first=false;return D.seiten.map(function(s,i){if(LK[s.id]){if(first)return "";first=true;}return '<a href="#s-'+s.id+'" data-act="goto" data-s="'+s.id+'">'+(i+1)+'. '+esc(s.titel||"Ohne Titel")+(s.stempel?' ✔':'')+(LK[s.id]?' 🔒':'')+'</a>';}).join("");})()+'</aside>';
+  var m='<main><div class="bar"><button class="btn" data-act="save">💾 Speichern</button><button class="btn sec" data-act="saveAs">Speichern unter …</button><button class="btn ghost" data-act="newPage">+ Eigene Seite</button>'+(D.meta.sperre?'':'<button class="btn ghost" data-act="import">📥 Auftrag einfügen</button>')+'<button class="btn ghost" data-act="print">🖨️ Drucken / PDF</button><button class="btn ghost" data-act="help">❔ Hilfe</button><span class="state '+(UI.dirty?"dirty":"")+'" id="state">'+(UI.dirty?"● nicht gespeichert":(D.meta.gespeichert?"✔ gespeichert":""))+'</span><span style="flex:1"></span><button class="btn ghost sm" data-act="lehrer">'+(UI.lehrer?"🔓 Lehrkraft-Modus beenden":"🔒 Lehrkraft")+'</button></div>';
+  if(UI.view==="glossar")m+=glossar();
+  else if(UI.view.indexOf("k:")===0&&D.kurs&&D.kurs.views[UI.view.slice(2)])m+='<div class="page kv">'+D.kurs.views[UI.view.slice(2)].html+'</div>';
+  else{
+    if(!D.seiten.length)m+='<div class="page"><p>Dein Heft ist noch leer. Klicke auf <b>+ Neue Seite</b> oder füge einen <b>Auftrag</b> deiner Lehrkraft ein.</p></div>';
+    if(!D.meta.name)m+='<div class="page" style="border:2px solid #2563a8"><b>👋 Willkommen! Trage zuerst deinen Namen ein:</b><div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:flex-end;margin-top:.4rem"><div><label class="f">Vorname</label><input type="text" id="nm" autocomplete="off" style="width:12rem"></div><div><label class="f">1. Buchstabe Nachname</label><input type="text" id="ni" maxlength="1" autocomplete="off" style="width:4rem;text-transform:uppercase"></div><div><label class="f">Klasse</label><input type="text" id="kl" value="'+esc(D.meta.klasse||"")+'" style="width:7rem"></div><button class="btn" data-act="start">Übernehmen</button></div></div>';
+    if(UI.lehrer){var sp0=D.meta.sperre||{};m+='<div class="page teacher" style="background:#eef7ee"><b>Lehrkraft: Freischaltung der Seiten</b><div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.4rem"><label><input type="checkbox" data-act="spAn"'+(sp0.an?" checked":"")+'> Nächste Seite erst nach Bearbeitung freischalten</label><span>Schwelle:</span>'+[50,75,100].map(function(v){return '<button class="btn sm '+((sp0.schwelle||100)===v?"":"ghost")+'" data-act="spSchwelle" data-v="'+v+'">'+v+' %</button>';}).join("")+'</div></div>';}
+    var shownLock=false;D.seiten.forEach(function(s){if(LK[s.id]){if(!shownLock){m+=lockedHtml(s,LK[s.id]);shownLock=true;}}else m+=pageHtml(s);});
+  }
+  m+=legal()+'</main>';
+  $("#app").innerHTML=a+m;
+  mountRich();mountCanvas();mountPdf();
+}
+function startScreen(){
+  $("#app").innerHTML='<main style="margin:auto;max-width:520px"><div class="page"><h1 style="margin-top:0">📓 '+esc(D.meta.titel||"Mein Informatik-Heft")+'</h1><p>Willkommen! Trage zuerst deinen Vornamen und den ersten Buchstaben deines Nachnamens ein (z. B. „Mia K.“). Danach kannst du sofort loslegen.</p>'+
+   '<label class="f">Dein Vorname</label><input type="text" id="nm" autocomplete="off"><label class="f">Erster Buchstabe deines Nachnamens</label><input type="text" id="ni" maxlength="1" autocomplete="off" style="max-width:4rem;text-transform:uppercase"><label class="f">Deine Klasse</label><input type="text" id="kl" value="'+esc(D.meta.klasse||"")+'">'+
+   '<p class="small muted">Wichtig: Speichere dein Heft mit <b>💾 Speichern</b> in deinem Ordner. Am Ende lädst du die Datei in Moodle hoch.</p><button class="btn" data-act="start">Los geht’s</button></div>'+legal()+'</main>';
+}
+function kursInfo(s,k){var Q=(D.kurs.quiz||{})[k.q],h='<div class="kinfo no-print-x"><div><b>🎯 Ziel:</b> '+md(k.z)+'</div>';
+  if(Q)h+='<details><summary>🔁 Wiederholungs-Quiz: '+esc(Q.n)+(s.quizErg?' <span class="small" style="color:#2e7d32">('+esc(s.quizErg)+')</span>':'')+'</summary>'+Q.f.map(function(f,i){return '<div class="kq"><p>'+(i+1)+'. '+esc(f[0])+'</p>'+f[1].map(function(a,j){return '<label><input type="radio" name="kq-'+s.id+'-'+i+'" value="'+j+'"> '+esc(a)+'</label>';}).join("")+'<div class="small" data-kqfb="'+s.id+'-'+i+'"></div></div>';}).join("")+'<button class="btn sm" data-act="kq" data-s="'+s.id+'">Auswerten</button></details>';
+  if(k.a)h+='<div style="margin-top:.4rem"><b>📝 Deine Aufgabe – wähle dein Niveau:</b></div><div class="niv"><div class="b"><b>Basis</b>'+md(k.a.b)+'</div><div class="s"><b>Standard</b>'+md(k.a.s)+'</div><div class="e"><b>Profi</b>'+md(k.a.e)+'</div></div>';
+  if(k.x&&D.kurs.views[k.x])h+='<button class="btn ghost sm" data-act="view" data-v="k:'+k.x+'">🛠️ Hilfe & Anleitung: '+esc(D.kurs.views[k.x].t.replace(/^\S+\s/,""))+'</button>';
+  return h+'</div><div class="small muted" style="margin:.2rem 0">Bearbeite jetzt die Aufträge im Heft:</div>';}
+function lockedHtml(s,prev){var f=fortschritt(prev),sp=sperre();
+  return '<section class="page" id="s-'+s.id+'" style="opacity:.75"><div class="ph"><span style="font-size:1.25rem;font-weight:700">🔒 '+esc(s.titel||"Nächste Seite")+'</span></div><p>Diese Seite wird freigeschaltet, sobald du die Aufträge auf der Seite <b>„'+esc(prev.titel||"vorher")+'“</b> zu mindestens <b>'+(sp.schwelle||100)+' %</b> bearbeitet hast.</p><p class="small muted">Dein Stand dort: '+f.f+' von '+f.n+' Aufträgen erledigt.</p><a class="btn sec sm" href="#s-'+prev.id+'">Zur Seite „'+esc(prev.titel||"vorher")+'“</a></section>';}
+function progHtml(s){if(!s.pflicht)return "";var f=fortschritt(s);if(!f.n)return "";var pc=Math.round(f.q*100);
+  return '<div class="small" style="margin:.2rem 0 .5rem"><div style="height:8px;background:#e5e9ef;border-radius:99px;overflow:hidden"><div style="width:'+pc+'%;height:100%;background:'+(pc>=100?"#2e7d32":"#2563a8")+'"></div></div>'+f.f+' von '+f.n+' Aufträgen erledigt'+(pc>=100?' ✔':'')+(UI.lehrer?' · <button class="btn ghost sm" data-act="frei" data-s="'+s.id+'">'+(s.frei?"Freigabe der Folgeseite zurücknehmen":"Folgeseite für dieses Heft freigeben")+'</button>':'')+'</div>';}
+function pageHtml(s){
+  var h='<section class="page" id="s-'+s.id+'"><div class="ph"><input class="t" data-pf="titel" data-s="'+s.id+'" value="'+esc(s.titel||"")+'" placeholder="Titel der Seite"><input type="date" class="d" data-pf="datum" data-s="'+s.id+'" value="'+esc(s.datum||"")+'">'+(s.pflicht&&!UI.lehrer?'':'<button class="btn ghost sm no-print" data-act="delPage" data-s="'+s.id+'" title="Seite löschen">🗑</button>')+'</div>'+progHtml(s);
+  if(s.auftrag)h+='<div class="auf"><b>Auftrag:</b> '+md(s.auftrag)+'</div>';
+  if(D.kurs&&s.k!=null&&D.kurs.stunden[s.k])h+=kursInfo(s,D.kurs.stunden[s.k]);
+  (s.bloecke||[]).forEach(function(b,i){h+=blockHtml(s,b,i);});
+  var MAIN=["text","bild","link","datei","zeichnung","tabelle","begriff"],MORE=Object.keys(TYPES).filter(function(k){return MAIN.indexOf(k)<0;});
+  h+='<div class="no-print" style="margin-top:.8rem;border-top:1px dashed var(--line);padding-top:.5rem"><div class="small muted">➕ Selbst etwas hinzufügen:</div><div class="add">'+MAIN.map(function(k){return '<button data-act="add" data-s="'+s.id+'" data-t="'+k+'">'+TYPES[k]+'</button>';}).join("")+'</div><details><summary class="small" style="cursor:pointer;color:#2563a8">weitere Bausteine</summary><div class="add">'+MORE.map(function(k){return '<button data-act="add" data-s="'+s.id+'" data-t="'+k+'">'+TYPES[k]+'</button>';}).join("")+'</div></details></div>';
+  if(s.stempel||s.kommentar||UI.lehrer){h+='<div class="teacher">';
+    if(s.stempel)h+='<span class="stamp '+({"Bitte überarbeiten":"bad","Super!":"star"}[s.stempel]||"")+'">'+esc(s.stempel)+'</span>';
+    if(UI.lehrer){h+='<label class="f">Rückmeldung der Lehrkraft</label><textarea data-pf="kommentar" data-s="'+s.id+'">'+esc(s.kommentar||"")+'</textarea><div class="row" style="margin-top:.3rem">'+["Erledigt","Super!","Bitte überarbeiten",""].map(function(x){return '<button class="btn ghost sm" data-act="stamp" data-s="'+s.id+'" data-v="'+x+'">'+(x||"Stempel entfernen")+'</button>';}).join(" ")+'</div>';}
+    else if(s.kommentar)h+='<b>Rückmeldung:</b> '+md(s.kommentar);
+    h+='</div>';}
+  return h+'</section>';
+}
+function head(s,b,i){return '<div class="bh"><span>'+TYPES[b.typ]+'</span>'+(b.pflicht?' <span class="mark" data-mk="'+b.id+'" style="font-weight:700;color:'+(fertig(b)?'#2e7d32">✔ erledigt':'#b26a00">○ Auftrag')+'</span>':'')+'<span class="grow"></span><button data-act="up" data-s="'+s.id+'" data-b="'+b.id+'" title="nach oben">↑</button><button data-act="down" data-s="'+s.id+'" data-b="'+b.id+'" title="nach unten">↓</button>'+(b.pflicht&&!UI.lehrer?'':'<button data-act="delB" data-s="'+s.id+'" data-b="'+b.id+'" title="löschen">✕</button>')+'</div>'+(b.auftrag?'<div class="auf"><b>Auftrag:</b> '+md(b.auftrag)+'</div>':'');}
+function A(s,b,f){return 'data-s="'+s.id+'" data-b="'+b.id+'" data-f="'+f+'"';}
+function blockHtml(s,b,i){
+  var h='<div class="blk" data-blk="'+b.id+'">'+head(s,b,i);
+  switch(b.typ){
+  case "text":h+='<div class="tb no-print"><button data-cmd="bold" title="fett"><b>F</b></button><button data-cmd="italic" title="kursiv"><i>K</i></button><button data-cmd="underline" title="unterstrichen"><u>U</u></button><button data-cmd="insertUnorderedList" title="Liste">• Liste</button><button data-cmd="mark" title="markieren">🖍</button></div><div class="rte" contenteditable="true" '+A(s,b,"html")+'></div>';break;
+  case "frage":h+=(b.frage?'<div><b>'+md(b.frage)+'</b></div>':'<label class="f">Frage</label><input type="text" '+A(s,b,"frage2")+' value="'+esc(b.frage2||"")+'" placeholder="Deine Frage">')+'<label class="f">Antwort</label><textarea '+A(s,b,"antwort")+'>'+esc(b.antwort||"")+'</textarea>';break;
+  case "tagebuch":h+='<div class="lk"><label class="small muted">Datum</label><input type="date" '+A(s,b,"datum")+' value="'+esc(b.datum||today())+'" style="max-width:11rem"></div><label class="f">Das habe ich heute gemacht und gelernt:</label><textarea '+A(s,b,"gelernt")+'>'+esc(b.gelernt||"")+'</textarea><label class="f">Das war schwierig / Das möchte ich noch fragen:</label><textarea '+A(s,b,"schwierig")+'>'+esc(b.schwierig||"")+'</textarea>'+
+    '<label class="f">So fühle ich mich nach der Stunde:</label><div class="mood">'+["😀","🙂","😐","😕","😣"].map(function(e){return '<button class="'+(b.stimmung===e?"on":"")+'" data-act="mood" data-s="'+s.id+'" data-b="'+b.id+'" data-v="'+e+'">'+e+'</button>';}).join("")+'</div>';break;
+  case "bild":h+=(b.src?'<img class="pic" src="'+esc(b.src)+'" alt="'+esc(b.text||"Bild")+'"><button class="btn ghost sm no-print" data-act="clr" data-s="'+s.id+'" data-b="'+b.id+'" data-f="src">Bild ersetzen</button>':'<div class="drop" data-drop="img" data-s="'+s.id+'" data-b="'+b.id+'">Bild hierher ziehen, <b>klicken</b> zum Auswählen oder mit <b>Strg+V</b> einfügen (z. B. ein Bildschirmfoto)</div>')+
+    '<label class="f">Bildunterschrift / Quelle</label><input type="text" '+A(s,b,"text")+' value="'+esc(b.text||"")+'" placeholder="Was zeigt das Bild? Woher stammt es?">';break;
+  case "datei":if(b.data){h+='<div class="lk">📎 <b>'+esc(b.name)+'</b> <span class="small muted">('+Math.round((b.size||0)/1024)+' KB)</span><button class="btn sec sm" data-act="openFile" data-s="'+s.id+'" data-b="'+b.id+'">Öffnen</button><button class="btn ghost sm no-print" data-act="clr" data-s="'+s.id+'" data-b="'+b.id+'" data-f="data">Entfernen</button></div>'+(b.mime==="application/pdf"?'<div data-pdf="'+b.id+'" data-s="'+s.id+'"></div>':'');}
+    else h+='<div class="drop" data-drop="file" data-s="'+s.id+'" data-b="'+b.id+'">PDF oder Datei hierher ziehen oder <b>klicken</b> zum Auswählen (max. 8 MB)</div>';
+    h+='<label class="f">Notiz</label><input type="text" '+A(s,b,"text")+' value="'+esc(b.text||"")+'">';break;
+  case "link":h+='<label class="f">Adresse (https://…)</label><input type="url" '+A(s,b,"url")+' value="'+esc(b.url||"")+'" placeholder="https://"><label class="f">Titel</label><input type="text" '+A(s,b,"titel")+' value="'+esc(b.titel||"")+'"><label class="f">Was habe ich dort gefunden?</label><textarea '+A(s,b,"text")+'>'+esc(b.text||"")+'</textarea>'+
+    (/^https?:\/\//i.test(b.url||"")?'<a class="btn sec sm" href="'+esc(b.url)+'" target="_blank" rel="noopener noreferrer">'+(/youtu|vimeo|video|mediathek/i.test(b.url)?"▶ Video öffnen":"🔗 Seite öffnen")+'</a>':'');break;
+  case "zeichnung":h+='<div class="pal no-print">'+["#1d2733","#c62828","#2563a8","#2e7d32","#e6a100"].map(function(c){return '<button class="c'+((UI.draw[b.id]||{}).c===c||(!UI.draw[b.id]&&c==="#1d2733")?" on":"")+'" style="background:'+c+'" data-act="pen" data-b="'+b.id+'" data-v="'+c+'" title="Farbe"></button>';}).join("")+
+    '<button class="btn ghost sm" data-act="pen" data-b="'+b.id+'" data-v="erase">Radierer</button><button class="btn ghost sm" data-act="penW" data-b="'+b.id+'" data-v="3">dünn</button><button class="btn ghost sm" data-act="penW" data-b="'+b.id+'" data-v="8">dick</button><button class="btn ghost sm" data-act="undo" data-s="'+s.id+'" data-b="'+b.id+'">↶ zurück</button><button class="btn ghost sm" data-act="clrDraw" data-s="'+s.id+'" data-b="'+b.id+'">Alles löschen</button></div><canvas class="draw" width="860" height="440" data-s="'+s.id+'" data-b="'+b.id+'"></canvas>';break;
+  case "tabelle":{var rows=b.zeilen||[["","",""],["","",""]];h+='<table class="tab">'+rows.map(function(r,ri){return '<tr>'+r.map(function(c,ci){return '<td><input type="text" data-cell="'+ri+','+ci+'" data-s="'+s.id+'" data-b="'+b.id+'" value="'+esc(c)+'"></td>';}).join("")+'</tr>';}).join("")+'</table><div class="no-print" style="margin-top:.3rem"><button class="btn ghost sm" data-act="row" data-s="'+s.id+'" data-b="'+b.id+'">+ Zeile</button> <button class="btn ghost sm" data-act="col" data-s="'+s.id+'" data-b="'+b.id+'">+ Spalte</button> <button class="btn ghost sm" data-act="rowDel" data-s="'+s.id+'" data-b="'+b.id+'">– Zeile</button></div>';break;}
+  case "checkliste":h+=(b.punkte||[]).map(function(p,pi){return '<div class="chk"><input type="checkbox" data-chk="'+pi+'" data-s="'+s.id+'" data-b="'+b.id+'"'+(p.ok?" checked":"")+'><input type="text" data-chkt="'+pi+'" data-s="'+s.id+'" data-b="'+b.id+'" value="'+esc(p.t)+'"></div>';}).join("")+'<button class="btn ghost sm no-print" data-act="chkAdd" data-s="'+s.id+'" data-b="'+b.id+'">+ Punkt</button>';break;
+  case "selbst":h+=(b.punkte||[]).map(function(p,pi){return '<div class="self"><span>'+(p.fest?esc(p.t):'<input type="text" data-selt="'+pi+'" data-s="'+s.id+'" data-b="'+b.id+'" value="'+esc(p.t)+'" placeholder="Ich kann …">')+'</span><span class="amp">'+[["g","🟢"],["y","🟡"],["r","🔴"]].map(function(a){return '<button class="'+(p.v===a[0]?"on":"")+'" data-act="selV" data-s="'+s.id+'" data-b="'+b.id+'" data-i="'+pi+'" data-v="'+a[0]+'" title="'+({g:"kann ich",y:"geht so",r:"kann ich noch nicht"})[a[0]]+'">'+a[1]+'</button>';}).join("")+'</span></div>';}).join("")+'<button class="btn ghost sm no-print" data-act="selAdd" data-s="'+s.id+'" data-b="'+b.id+'">+ Aussage</button><div class="small muted">🟢 kann ich · 🟡 geht so · 🔴 kann ich noch nicht</div>';break;
+  case "begriff":h+='<label class="f">Fachbegriff</label><input type="text" '+A(s,b,"begriff")+' value="'+esc(b.begriff||"")+'"><label class="f">Erklärung in meinen Worten</label><textarea '+A(s,b,"erklaerung")+'>'+esc(b.erklaerung||"")+'</textarea>';break;
+  case "caesar":{var k=+b.k||3;h+='<div class="caesar"><label class="f">Text</label><textarea '+A(s,b,"klar")+'>'+esc(b.klar||"")+'</textarea><div class="lk"><label class="small">Schlüssel: <b>'+k+'</b></label><input type="range" min="1" max="25" value="'+k+'" data-s="'+s.id+'" data-b="'+b.id+'" data-f="k" style="flex:1"></div>'+
+    '<div class="rings">'+abc(0)+'<br>'+abc(k)+'</div><button class="btn sec sm" data-act="cz" data-s="'+s.id+'" data-b="'+b.id+'" data-v="1">🔒 Verschlüsseln</button> <button class="btn sec sm" data-act="cz" data-s="'+s.id+'" data-b="'+b.id+'" data-v="-1">🔓 Entschlüsseln</button><label class="f">Ergebnis</label><textarea '+A(s,b,"geheim")+'>'+esc(b.geheim||"")+'</textarea></div>';break;}
+  }
+  return h+'</div>';
+}
+function abc(k){var s="";for(var i=0;i<26;i++)s+=String.fromCharCode(65+(i+k)%26)+" ";return s;}
+function caesar(t,k){return t.replace(/[a-zA-ZäöüÄÖÜ]/g,function(c){var m={"ä":"ae","ö":"oe","ü":"ue","Ä":"AE","Ö":"OE","Ü":"UE"};if(m[c])return caesar(m[c],k);var b=c<="Z"?65:97;return String.fromCharCode(b+(((c.charCodeAt(0)-b+k)%26)+26)%26);});}
+function glossar(){var all=[];D.seiten.forEach(function(s){(s.bloecke||[]).forEach(function(b){if(b.typ==="begriff"&&b.begriff)all.push(b);});});
+  all.sort(function(a,b){return a.begriff.localeCompare(b.begriff,"de");});
+  return '<div class="page"><h2 style="margin-top:0">📚 Mein Wissensspeicher</h2>'+(all.length?'<dl class="gl">'+all.map(function(b){return '<dt>'+esc(b.begriff)+'</dt><dd>'+md(b.erklaerung||"")+'</dd>';}).join("")+'</dl>':'<p class="muted">Noch keine Fachbegriffe. Füge auf einer Seite den Baustein <b>📚 Fachbegriff</b> hinzu.</p>')+'</div>';}
+function legal(){return '<footer class="dk-legal"><div class="dk-legal-buttons"><button type="button" class="dk-btn" data-act="dk" data-v="dk-impressum">Impressum</button><button type="button" class="dk-btn" data-act="dk" data-v="dk-datenschutz">Datenschutz</button></div><p class="dk-cc"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-SA 4.0</a> · Stefan Kierek</p></footer>';}
+function dlg(title,body,btns){$("#ov").innerHTML='<div class="ov"><div class="dlg"><h2>'+esc(title)+'</h2>'+body+'<div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem">'+btns.map(function(b,i){return '<button class="btn '+(b.cls||"")+'" data-act="dlg" data-i="'+i+'">'+esc(b.l)+'</button>';}).join("")+'</div></div></div>';UI.btns=btns;var f=$("#ov input,#ov textarea");if(f)f.focus();}
+function closeDlg(){$("#ov").innerHTML="";UI.btns=null;}
+
+/* Rich-Text, Canvas, PDF nach dem Rendern */
+function mountRich(){Array.prototype.forEach.call(document.querySelectorAll(".rte"),function(el){var x=findB(el.dataset.s,el.dataset.b);if(x.b)el.innerHTML=clean(x.b.html||"");});}
+function mountCanvas(){Array.prototype.forEach.call(document.querySelectorAll("canvas.draw"),function(cv){
+  var x=findB(cv.dataset.s,cv.dataset.b),ctx=cv.getContext&&cv.getContext("2d");if(!x.b||!ctx)return;
+  if(x.b.png){var im=new Image();im.onload=function(){ctx.drawImage(im,0,0);};im.src=x.b.png;}
+  var st=UI.draw[x.b.id]=UI.draw[x.b.id]||{c:"#1d2733",w:3,hist:[]};var down=false,lx=0,ly=0;
+  function pos(e){var r=cv.getBoundingClientRect();return [(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height];}
+  cv.onpointerdown=function(e){down=true;cv.setPointerCapture(e.pointerId);st.hist.push(cv.toDataURL());if(st.hist.length>15)st.hist.shift();var p=pos(e);lx=p[0];ly=p[1];};
+  cv.onpointermove=function(e){if(!down)return;var p=pos(e);ctx.globalCompositeOperation=st.c==="erase"?"destination-out":"source-over";ctx.strokeStyle=st.c==="erase"?"#000":st.c;ctx.lineWidth=st.c==="erase"?18:st.w;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(lx,ly);ctx.lineTo(p[0],p[1]);ctx.stroke();lx=p[0];ly=p[1];};
+  cv.onpointerup=function(){if(!down)return;down=false;ctx.globalCompositeOperation="source-over";x.b.png=cv.toDataURL("image/png");dirty();};});}
+function mountPdf(){Array.prototype.forEach.call(document.querySelectorAll("[data-pdf]"),function(el){var x=findB(el.dataset.s,el.dataset.pdf);if(!x.b||!x.b.data)return;
+  var u=blobUrl(x.b);el.innerHTML='<iframe class="pdf" src="'+u+'" title="PDF-Vorschau"></iframe>';});}
+var urls={};function blobUrl(b){if(urls[b.id])return urls[b.id];var bin=atob(b.data.split(",")[1]),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return urls[b.id]=URL.createObjectURL(new Blob([u],{type:b.mime||"application/octet-stream"}));}
+
+/* ===== Dateien & Bilder ===== */
+function readImg(file,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var max=1600,w=im.width,h=im.height,f=Math.min(1,max/Math.max(w,h));var c=document.createElement("canvas");c.width=Math.round(w*f);c.height=Math.round(h*f);c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+  cb(file.type==="image/png"&&c.width*c.height<600000?c.toDataURL("image/png"):c.toDataURL("image/jpeg",.82));};im.onerror=function(){toast("Bild konnte nicht gelesen werden.");};im.src=r.result;};r.readAsDataURL(file);}
+function setImg(sid,bid,file){readImg(file,function(u){var x=findB(sid,bid);x.b.src=u;dirty();render();});}
+function setFile(sid,bid,file){if(file.size>8*1024*1024){toast("Die Datei ist zu groß (max. 8 MB).");return;}var r=new FileReader();r.onload=function(){var x=findB(sid,bid);x.b.data=r.result;x.b.name=file.name;x.b.mime=file.type;x.b.size=file.size;dirty();render();};r.readAsDataURL(file);}
+function pick(accept,cb){var i=document.createElement("input");i.type="file";i.accept=accept;i.onchange=function(){if(i.files[0])cb(i.files[0]);};i.click();}
+
+/* ===== Seiten & Bausteine ===== */
+function newBlock(t,extra){var b={id:uid(),typ:t};if(t==="tabelle")b.zeilen=[["","",""],["","",""],["","",""]];if(t==="checkliste")b.punkte=[{t:"",ok:false}];if(t==="selbst")b.punkte=[{t:"",v:""}];if(t==="caesar")b.k=3;if(t==="tagebuch")b.datum=today();
+  if(extra)for(var k in extra)b[k]=extra[k];return b;}
+function curPage(){var best=null,y=Infinity;Array.prototype.forEach.call(document.querySelectorAll(".page[id^=s-]"),function(p){var r=p.getBoundingClientRect();var d=Math.abs(r.top-80);if(r.bottom>80&&d<y){y=d;best=p.id.slice(2);}});return best||(D.seiten[D.seiten.length-1]||{}).id;}
+function addPage(t){var s={id:uid(),titel:t||"",datum:today(),bloecke:[]};D.seiten.push(s);dirty();render();var el=document.getElementById("s-"+s.id);if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth"});return s;}
+function fromAuftrag(a){/* a: {titel,datum,auftrag,items:[{typ,text,spalten,punkte}]} */
+  var s={id:uid(),titel:a.titel||"Auftrag",datum:a.datum||today(),auftrag:a.auftrag||"",bloecke:[],pflicht:true};if(a.k!=null)s.k=a.k;
+  (a.items||[]).forEach(function(it){if(!TYPES[it.typ])return;var ex={auftrag:it.text||""};
+    if(it.typ==="frage"){ex.frage=it.text;ex.auftrag="";}
+    if(it.typ==="tabelle"&&it.liste&&it.liste.length){ex.zeilen=[it.liste.slice(),it.liste.map(function(){return "";}),it.liste.map(function(){return "";})];}
+    if(it.typ==="checkliste"&&it.liste)ex.punkte=it.liste.map(function(t){return {t:t,ok:false};});
+    if(it.typ==="selbst"&&it.liste)ex.punkte=it.liste.map(function(t){return {t:t,v:"",fest:true};});
+    if(it.typ==="begriff"&&it.begriff){ex.begriff=it.begriff;}
+    ex.pflicht=true;s.bloecke.push(newBlock(it.typ,ex));});
+  return s;}
+function decodeCode(code){code=code.trim();if(code.indexOf("HEFT1:")!==0)throw new Error("Das ist kein gültiger Auftrags-Code.");
+  var bin=atob(code.slice(6).replace(/\s+/g,"")),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return JSON.parse(new TextDecoder().decode(u));}
+
+/* ===== Ereignisse ===== */
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-act],[data-cmd],[data-drop]");if(!t)return;
+  if(t.dataset.cmd){e.preventDefault();var ed=t.closest(".blk").querySelector(".rte");ed.focus();
+    if(t.dataset.cmd==="mark"){var sel=window.getSelection();if(sel.rangeCount&&!sel.isCollapsed){var m=document.createElement("mark");try{sel.getRangeAt(0).surroundContents(m);}catch(x){document.execCommand("hiliteColor",false,"#fff176");}}}
+    else document.execCommand(t.dataset.cmd,false,null);saveRte(ed);return;}
+  if(t.dataset.drop){var x0=t.dataset;pick(x0.drop==="img"?"image/*":"*/*",function(f){(x0.drop==="img"?setImg:setFile)(x0.s,x0.b,f);});return;}
+  var a=t.dataset.act,x=t.dataset.s?findB(t.dataset.s,t.dataset.b):{};
+  if(a!=="goto"&&t.tagName==="A"&&!t.target)e.preventDefault();
+  switch(a){
+  case "start":{var n=$("#nm").value.trim().split(/\s+/)[0]||"",ini=($("#ni").value.trim()[0]||"").toUpperCase();if(!n||!/[A-ZÄÖÜ]/.test(ini)){toast("Bitte Vorname und den ersten Buchstaben deines Nachnamens eintragen.");return;}D.meta.name=n+" "+ini+".";D.meta.klasse=$("#kl").value.trim();dirty();render();break;}
+  case "view":UI.view=t.dataset.v;render();window.scrollTo&&window.scrollTo(0,0);break;
+  case "goto":UI.view="heft";if(!document.getElementById("s-"+t.dataset.s))render();break;
+  case "save":saveFile(false);break;
+  case "saveAs":saveFile(true);break;
+  case "print":window.print();break;
+  case "newPage":UI.view="heft";addPage("");break;
+  case "delPage":dlg("Seite löschen?",'<p>Die ganze Seite „'+esc(x.s.titel||"Ohne Titel")+'“ mit allen Einträgen wird gelöscht.</p>',[{l:"Abbrechen",cls:"ghost"},{l:"Löschen",cls:"danger",fn:function(){D.seiten=D.seiten.filter(function(s){return s!==x.s;});dirty();render();}}]);break;
+  case "add":{var b=newBlock(t.dataset.t);x.s.bloecke=x.s.bloecke||[];x.s.bloecke.push(b);dirty();render();var el=document.querySelector('[data-blk="'+b.id+'"]');if(el){if(el.scrollIntoView)el.scrollIntoView({block:"center"});var f=el.querySelector("textarea,input,.rte");if(f)f.focus();}break;}
+  case "delB":dlg("Baustein löschen?","<p>Dieser Eintrag wird gelöscht.</p>",[{l:"Abbrechen",cls:"ghost"},{l:"Löschen",cls:"danger",fn:function(){x.s.bloecke=x.s.bloecke.filter(function(b){return b!==x.b;});dirty();render();}}]);break;
+  case "up":case "down":{var L=x.s.bloecke,i=L.indexOf(x.b),j=i+(a==="up"?-1:1);if(j<0||j>=L.length)break;L[i]=L[j];L[j]=x.b;dirty();render();break;}
+  case "mood":x.b.stimmung=x.b.stimmung===t.dataset.v?"":t.dataset.v;dirty();render();break;
+  case "clr":delete x.b[t.dataset.f];if(t.dataset.f==="data"){delete x.b.name;delete x.b.mime;delete x.b.size;}dirty();render();break;
+  case "openFile":{var u=blobUrl(x.b);if(x.b.mime==="application/pdf"||/^image\//.test(x.b.mime||"")){window.open(u,"_blank");}else{var l=document.createElement("a");l.href=u;l.download=x.b.name;document.body.appendChild(l);l.click();l.remove();}break;}
+  case "pen":{var st=UI.draw[t.dataset.b]=UI.draw[t.dataset.b]||{c:"#1d2733",w:3,hist:[]};st.c=t.dataset.v;Array.prototype.forEach.call(t.parentNode.querySelectorAll(".c"),function(c){c.classList.toggle("on",c.dataset.v===st.c);});break;}
+  case "penW":{var st2=UI.draw[t.dataset.b]=UI.draw[t.dataset.b]||{c:"#1d2733",w:3,hist:[]};st2.w=+t.dataset.v;if(st2.c==="erase")st2.c="#1d2733";break;}
+  case "undo":{var st3=UI.draw[t.dataset.b];if(!st3||!st3.hist.length)break;var prev=st3.hist.pop();x.b.png=prev;dirty();render();break;}
+  case "clrDraw":dlg("Zeichnung löschen?","<p>Die ganze Zeichnung wird gelöscht.</p>",[{l:"Abbrechen",cls:"ghost"},{l:"Löschen",cls:"danger",fn:function(){delete x.b.png;dirty();render();}}]);break;
+  case "row":x.b.zeilen.push(x.b.zeilen[0].map(function(){return "";}));dirty();render();break;
+  case "rowDel":if(x.b.zeilen.length>1){x.b.zeilen.pop();dirty();render();}break;
+  case "col":x.b.zeilen.forEach(function(r){r.push("");});dirty();render();break;
+  case "chkAdd":x.b.punkte.push({t:"",ok:false});dirty();render();break;
+  case "selAdd":x.b.punkte.push({t:"",v:""});dirty();render();break;
+  case "selV":{var p=x.b.punkte[+t.dataset.i];p.v=p.v===t.dataset.v?"":t.dataset.v;dirty();render();break;}
+  case "cz":{var ta=document.querySelector('textarea[data-b="'+x.b.id+'"][data-f="klar"]');x.b.klar=ta?ta.value:x.b.klar;x.b.geheim=caesar(x.b.klar||"",(+x.b.k||3)*(+t.dataset.v));dirty();render();break;}
+  case "stamp":x.s.stempel=t.dataset.v;dirty();render();break;
+  case "kq":{var Q=D.kurs.quiz[D.kurs.stunden[x.s.k].q],r=0;Q.f.forEach(function(f,i){var sel=document.querySelector('input[name="kq-'+x.s.id+'-'+i+'"]:checked'),ok=sel&&+sel.value===f[2];if(ok)r++;var fb=document.querySelector('[data-kqfb="'+x.s.id+'-'+i+'"]');if(fb)fb.innerHTML=ok?'<span style="color:#2e7d32;font-weight:700">✔ richtig</span>':'<span style="color:#c62828;font-weight:700">✘</span> Richtig ist: '+esc(f[1][f[2]]);});
+    x.s.quizErg=r+" von "+Q.f.length+" richtig";dirty();toast(x.s.quizErg+(r===Q.f.length?" – super!":""));break;}
+  case "spAn":D.meta.sperre=D.meta.sperre||{schwelle:100};D.meta.sperre.an=t.checked;dirty();render();break;
+  case "spSchwelle":D.meta.sperre=D.meta.sperre||{an:true};D.meta.sperre.schwelle=+t.dataset.v;dirty();render();break;
+  case "frei":{var i0=D.seiten.indexOf(x.s),nx=null;for(var k=i0+1;k<D.seiten.length;k++)if(D.seiten[k].pflicht){nx=D.seiten[k];break;}if(!nx){toast("Keine Folgeseite mit Aufträgen.");break;}nx.frei=!x.s.frei;x.s.frei=!x.s.frei;dirty();render();break;}
+  case "import":dlg("Auftrag einfügen",'<p class="small">Füge hier den Auftrags-Code deiner Lehrkraft ein (er beginnt mit <b>HEFT1:</b>).</p><textarea id="code" style="min-height:7rem"></textarea>',[{l:"Abbrechen",cls:"ghost"},{l:"Einfügen",fn:function(){try{var o=decodeCode($("#code").value);var list=o.seiten||[o];list.forEach(function(a){D.seiten.push(fromAuftrag(a));});if(o.titel&&!D.meta.titel)D.meta.titel=o.titel;dirty();render();toast("Auftrag eingefügt.");}catch(err){toast(err.message||"Code ungültig.");return false;}}}]);break;
+  case "help":dlg("So funktioniert dein Heft",'<ul class="small"><li><b>💾 Speichern</b> sichert dein Heft als Datei. Speichere es in deinem Ordner – beim ersten Mal wählst du den Ort aus.</li><li>Öffne dein Heft in der nächsten Stunde mit <b>Doppelklick auf die Datei</b>.</li><li><b>+ Neue Seite</b> für jede Stunde, darunter fügst du Bausteine hinzu.</li><li>Bilder kannst du auch mit <b>Strg+V</b> einfügen (z. B. ein Bildschirmfoto mit <b>Windows+Shift+S</b>).</li><li><b>📥 Auftrag einfügen</b>: Code deiner Lehrkraft einfügen.</li><li>Abgabe: Lade die gespeicherte Heft-Datei in <b>Moodle</b> hoch.</li></ul>',[{l:"Verstanden"}]);break;
+  case "lehrer":if(UI.lehrer){UI.lehrer=false;render();break;}
+    dlg("Lehrkraft-Modus",'<label class="f">PIN</label><input type="text" id="pin" autocomplete="off">',[{l:"Abbrechen",cls:"ghost"},{l:"Öffnen",fn:function(){var v=$("#pin").value;if(!D.meta.pin){toast("Für dieses Heft ist keine PIN festgelegt.");return false;}if(hash(v)!==D.meta.pin){toast("PIN falsch.");return false;}UI.lehrer=true;render();}}]);break;
+  case "dlg":{var bb=UI.btns[+t.dataset.i];var r=bb.fn?bb.fn():true;if(r!==false)closeDlg();break;}
+  case "dk":document.getElementById(t.dataset.v).classList.add("dk-open");break;
+  }
+});
+function saveRte(el){var x=findB(el.dataset.s,el.dataset.b);if(!x.b)return;var h=clean(el.innerHTML);if(h!==x.b.html){x.b.html=h;dirty();}}
+document.addEventListener("input",function(e){var t=e.target;
+  if(t.classList.contains("rte")){saveRte(t);return;}
+  var x=t.dataset.s?findB(t.dataset.s,t.dataset.b):null;
+  if(t.dataset.pf&&x){x.s[t.dataset.pf]=t.value;dirty();if(t.dataset.pf==="titel"){var a=document.querySelector('aside a[data-s="'+x.s.id+'"]');if(a)a.textContent=(D.seiten.indexOf(x.s)+1)+". "+(t.value||"Ohne Titel");}return;}
+  if(!x||!x.b)return;
+  if(t.dataset.f){if(t.dataset.f==="k"){x.b.k=+t.value;dirty();var rings=t.closest(".caesar").querySelector(".rings");rings.innerHTML=abc(0)+"<br>"+abc(+t.value);t.parentNode.querySelector("b").textContent=t.value;return;}x.b[t.dataset.f]=t.value;dirty();return;}
+  if(t.dataset.cell){var rc=t.dataset.cell.split(",");x.b.zeilen[+rc[0]][+rc[1]]=t.value;dirty();return;}
+  if(t.dataset.chkt!=null){x.b.punkte[+t.dataset.chkt].t=t.value;dirty();return;}
+  if(t.dataset.selt!=null){x.b.punkte[+t.dataset.selt].t=t.value;dirty();return;}
+});
+document.addEventListener("change",function(e){var t=e.target;if(t.dataset.chk!=null){var x=findB(t.dataset.s,t.dataset.b);x.b.punkte[+t.dataset.chk].ok=t.checked;dirty();}
+  if(t.dataset.f==="url"){render();}});
+document.addEventListener("paste",function(e){var it=e.clipboardData&&e.clipboardData.items;if(!it)return;var f=null;for(var i=0;i<it.length;i++)if(it[i].type.indexOf("image/")===0){f=it[i].getAsFile();break;}
+  if(!f)return;var a=document.activeElement;if(a&&a.classList&&a.classList.contains("rte"))e.preventDefault();else if(a&&(a.tagName==="TEXTAREA"||a.tagName==="INPUT"))return;
+  e.preventDefault();var sid=curPage();if(!sid){sid=addPage("Neue Seite").id;}var s=findB(sid).s,b=newBlock("bild");s.bloecke.push(b);setImg(sid,b.id,f);toast("Bild eingefügt.");});
+["dragover","dragleave","drop"].forEach(function(ev){document.addEventListener(ev,function(e){var d=e.target.closest&&e.target.closest("[data-drop]");if(!d)return;e.preventDefault();d.classList.toggle("over",ev==="dragover");
+  if(ev==="drop"&&e.dataTransfer.files[0]){(d.dataset.drop==="img"?setImg:setFile)(d.dataset.s,d.dataset.b,e.dataTransfer.files[0]);}});});
+document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="s"){e.preventDefault();saveFile(false);}if(e.key==="Escape")closeDlg();});
+document.addEventListener("focusout",function(){setTimeout(function(){var a=document.activeElement;if(UI.pending&&!(a&&(a.tagName==="TEXTAREA"||a.tagName==="INPUT"||a.isContentEditable)))render();},0);});
+window.addEventListener("beforeunload",function(e){if(UI.dirty){e.preventDefault();e.returnValue="";}});
+document.addEventListener("click",function(e){var m=e.target.closest(".dk-modal");if(m&&(e.target===m||e.target.classList.contains("dk-close")))m.classList.remove("dk-open");});
+
+/* ===== Start: Notfallkopie prüfen ===== */
+if(D.auftraege&&D.auftraege.length){D.auftraege.forEach(function(x){D.seiten.push(fromAuftrag(x));});}delete D.auftraege;
+var bak=null;try{bak=JSON.parse(localStorage.getItem(LSK)||"null");}catch(e){}
+var savedAt=D.meta.gespeichert?Date.parse(D.meta.gespeichert):0;
+render();
+if(bak&&!bak.saved&&bak.t>savedAt+2000&&bak.d){dlg("Nicht gespeicherte Änderungen gefunden",'<p>In diesem Browser gibt es eine neuere, nicht gespeicherte Fassung dieses Hefts (vom '+new Date(bak.t).toLocaleString("de-DE")+'). Möchtest du sie wiederherstellen?</p>',[{l:"Nein, verwerfen",cls:"ghost",fn:function(){try{localStorage.removeItem(LSK);}catch(e){}}},{l:"Wiederherstellen",fn:function(){D=bak.d;UI.dirty=true;render();var s=$("#state");if(s){s.textContent="● nicht gespeichert";s.className="state dirty";}toast("Wiederhergestellt – bitte speichern.");}}]);}
+})();
+</script>
+<div id="dk-impressum" class="dk-modal" role="dialog" aria-modal="true"><div class="dk-modal-box"><button type="button" class="dk-close" aria-label="Schließen">&times;</button><h2>Impressum</h2><p>Stefan Kierek<br>Zur Boeckelt 26<br>47608 Geldern</p><p><a href="mailto:studio@stefankierek.de">studio@stefankierek.de</a></p></div></div>
+<div id="dk-datenschutz" class="dk-modal" role="dialog" aria-modal="true"><div class="dk-modal-box"><button type="button" class="dk-close" aria-label="Schließen">&times;</button><h2>Datenschutz</h2><p>Dieses Heft läuft vollständig auf deinem Computer. Es werden keine Daten an Server gesendet. Deine Einträge werden nur in der Heft-Datei gespeichert, die du selbst speicherst, sowie als Notfallkopie in diesem Browser.</p><p>Die verwendeten Schriften, Symbole und Bilder sind rechtlich unbedenklich – sie sind lizenzfrei oder entsprechend lizenziert und dürfen im schulischen Kontext verwendet werden.</p></div></div>
+</body>
+</html>
